@@ -83,3 +83,6 @@ class HopfSolver:  # needs to take in the Koopman matrix
             "phi": phi,
             "dphi_dz": dphi_dz,
         }
+
+
+# define node in the launch file

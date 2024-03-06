@@ -8,7 +8,7 @@ from std_msgs.msg import Empty
 
 from refinecbf_ros.config import Config
 
-# add the parent of this folder tot he path
+# add the parent of this folder to the path
 import sys
 import os
 

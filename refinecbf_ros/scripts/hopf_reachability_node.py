@@ -9,7 +9,7 @@ import numpy as np
 # from threading import Lock
 from std_msgs.msg import Bool
 from refinecbf_ros.msg import ValueFunctionMsg, HiLoArray, Array
-from refinecbf_ros import Config
+from refinecbf_ros.config import Config
 
 # from refinecbf_ros.config_hr import Config     # TODO: Make me, see refine_cbf
 
@@ -33,9 +33,9 @@ class HopfReachabilityNode:
 
         ## Init
 
-        config = Config()
-        self.safety_states_idis = config.safety_states
-        self.safety_controls_idis = config.safety_controls
+        self.config = Config()
+        self.safety_states_idis = self.config.safety_states
+        self.safety_controls_idis = self.config.safety_controls
 
         # self.Model = config_hr.Model          # TODO: Implement me
         # self.HR_solver = config_hr.HR_solver  # TODO: Implement me

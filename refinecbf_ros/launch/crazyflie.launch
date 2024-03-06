@@ -4,7 +4,7 @@
   <!-- Topics that need to be chosen by user and can be varied-->
   
     <!-- Whether we want to use nominal / external control or a safety filter -->
-  <arg name="safety_filter_active" default="True" />
+  <arg name="safety_filter_active" default="False" />
   
     <!-- Whether we want a single fixed value function (no updating) or updating using hj_reachability_node -->
   <arg name="update_vf_online" default="True" /> 
@@ -104,8 +104,26 @@
     <param name="control/min_thrust" value="$(arg min_thrust)" />
     <param name="control/max_roll" value="$(arg max_roll)" />
     <param name="control/max_pitch" value="$(arg max_pitch)" />
-
   </node> 
+  <!-- DEFINE Hopf Node -->
+    <node name="cf_hopf_control"
+        pkg="refinecbf_ros"
+        type="hopf_reachability_node.py"
+        output="screen"
+        ns="safety_filter">
+    <param name="topics/state" value="$(arg cbf_state_topic)" />
+    <param name="topics/nominal_control" value="$(arg cbf_nominal_control_topic)" />
+    <param name="topics/external_control" value="$(arg cbf_external_control_topic)" />
+    <param name="topics/publish_external_control_flag" value="$(arg publish_external_control_flag)" />
+    <param name="LQR/K_file" value="$(arg K_file)" />
+    <param name="LQR/u_ref_file" value="$(arg u_ref_file)" />
+    <param name="control/max_thrust" value="$(arg max_thrust)" />
+    <param name="control/min_thrust" value="$(arg min_thrust)" />
+    <param name="control/max_roll" value="$(arg max_roll)" />
+    <param name="control/max_pitch" value="$(arg max_pitch)" />
+  </node> 
+  <!-- Start testing functions -->
+  <!--  -->
 
   <node name="cf_hw_interface"
         pkg="refinecbf_ros"
