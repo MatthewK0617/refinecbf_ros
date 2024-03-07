@@ -19,7 +19,7 @@
   <arg name="vf_initialization_method" default="sdf" />
   
     <!-- Simulation or hardware -->
-  <arg name="hardware" default="True" />
+  <arg name="hardware" default="False" />
 
     <!-- What message passing method to use
           Options:

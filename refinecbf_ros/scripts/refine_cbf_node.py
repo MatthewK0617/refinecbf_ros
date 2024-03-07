@@ -70,7 +70,7 @@ class SafetyFilterNode:
             # This has to be done to ensure real-time performance
             self.initialized_safety_filter = False
             self.safety_filter_solver.setup_optimization_problem()
-            rospy.loginfo("safety filter is used, but not initialized yet")
+            rospy.loginfo("safety filter is used, but not initialized yet sdfsdf ")
 
         else:
             self.initialized_safety_filter = True
@@ -90,13 +90,17 @@ class SafetyFilterNode:
             return
         self.cbf.vf_table = np.array(np.load("./vf.npy")).reshape(self.grid.shape)
         if not self.initialized_safety_filter:
-            rospy.loginfo("Initialized safety filter")
+            rospy.loginfo("Initialized safety filter 1 1")
+            rospy.loginfo("Using refine cbf node")
+
             self.initialized_safety_filter = True
 
     def callback_vf_update_pubsub(self, vf_msg):
         self.cbf.vf_table = np.array(vf_msg.vf).reshape(self.grid.shape)
         if not self.initialized_safety_filter:
-            rospy.loginfo("Initialized safety filter")
+            rospy.loginfo("Initialized safety filter 1")
+            rospy.loginfo("Using refine cbf node")
+
             self.initialized_safety_filter = True
 
     def callback_safety_filter(self, control_msg):
@@ -106,7 +110,7 @@ class SafetyFilterNode:
             return
         if not self.initialized_safety_filter:
             safety_control_msg = control_msg
-            rospy.logwarn_throttle_identical(5.0, "Safety filter not initialized yet, outputting nominal control")
+            rospy.logwarn_throttle_identical(5.0, "Safety filter not initialized yet, outputting nominal control ASD ASD AS")
         else:
             nom_control_active = nom_control[self.safety_controls_idis]
             safety_control_msg = Array()

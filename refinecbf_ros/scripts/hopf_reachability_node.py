@@ -32,6 +32,7 @@ class HopfReachabilityNode:
     def __init__(self):
 
         ## Init
+        rospy.loginfo("Using hopf reachability node")
 
         self.config = Config()
         self.safety_states_idis = self.config.safety_states
@@ -46,6 +47,8 @@ class HopfReachabilityNode:
         self.safe_control_policy = None
         self.hopf_initialized = False
         self.use_hopf = True  # TODO: should be rosservice call triggered
+
+        # self.HR_solver = ?
 
         ## Subscriptions
 
@@ -98,5 +101,6 @@ class HopfReachabilityNode:
 
 if __name__ == "__main__":
     rospy.init_node("hopf_reachability_node")
+    rospy.loginfo("Using hopf reachability node")
     safety_filter = HopfReachabilityNode()
     rospy.spin()
