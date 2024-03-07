@@ -79,8 +79,11 @@ class HopfReachabilityNode:
         self.state = np.array(state_est_msg.value)[self.safety_states_idis]
 
     def callback_overwrite_control(self, control_msg):
+        nom_control = np.array(control_msg.value)
         if self.use_hopf and self.hopf_initialized:
-            safe_control = self.safe_control_policy(self.state.copy())
+            safe_control = nom_control
+            rospy.loginfo(nom_control)
+            # safe_control = self.safe_control_policy(self.state.copy())
             safe_control_msg = Array()
             safe_control_msg.value = safe_control.tolist()  # "Ensures compatibility"
         else:
@@ -90,9 +93,10 @@ class HopfReachabilityNode:
     def solve_hopf(self):
         while not rospy.is_shutdown():
             if self.use_hopf:
-                self.safe_control_policy = self.HR_solver(
-                    self.state.copy()
-                )  # should return state/time-dependent policy (function)
+                # self.safe_control_policy = self.HR_solver(
+                #     self.state.copy()
+                # )  # should return state/time-dependent policy (function)
+                # self.safe_control_policy = self.
                 self.hopf_initialized = True
             rospy.sleep(
                 0.05
@@ -104,3 +108,7 @@ if __name__ == "__main__":
     rospy.loginfo("Using hopf reachability node")
     safety_filter = HopfReachabilityNode()
     rospy.spin()
+
+
+
+# Have to add uref_sim.txt into the file requested (if doing on local)
